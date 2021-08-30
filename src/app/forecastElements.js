@@ -4,8 +4,7 @@ import search from '../images/search.png';
 import capitalize from 'capitalize';
 import {setCurrentForecast} from './logic';
 
-const celsius = new Image();
-celsius.src = celsiusIcon;
+
 const forecastGenerator = {};
 
 // sets up main forecast left side
@@ -30,7 +29,9 @@ forecastGenerator.getTodaysForecastElement = (forecastObject) => {
       container.append(wrapper);
 
       if (key == 'temp') {
-        container.appendChild(celsius);
+        const image = new Image();
+        image.src = celsiusIcon;
+        container.appendChild(image);
       }
       forecastWrap.append(container);
     }
@@ -81,18 +82,27 @@ const getSearchWrap = () => {
 // sets up todays details on the right side
 forecastGenerator.getTodaysDetails = (forecastObject) => {
   const forecastInfo = forecastObject.getDetails();
+  console.log(forecastInfo);
   const detailsWrap = document.createElement('div');
   detailsWrap.id = 'detailsWrap';
 
   for (const [key, val] of Object.entries(forecastInfo)) {
     const container = document.createElement('div');
+    const containerTitle = document.createElement('div');
+    containerTitle.classList.add('containerTitle');
+    containerTitle.innerText = key;
     container.classList.add('forecastItem');
-    container.id = key;
     container.innerText = val;
+    if (key == 'Feels Like') {
+      const image = new Image();
+      image.src = celsiusIcon;
+      container.append(image);
+    }
+    detailsWrap.append(containerTitle);
     detailsWrap.append(container);
   }
 
-  // document.querySelector('#infoWrap').append(detailsWrap);
+  return detailsWrap;
 };
 
 //

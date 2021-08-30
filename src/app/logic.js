@@ -7,8 +7,10 @@ async function setCurrentForecast(location) {
     const todaysForecast = await getTodaysForecast(location);
     const currentforecast =
       forecastGenerator.getTodaysForecastElement(todaysForecast);
+    const extraInfo = forecastGenerator.getTodaysDetails(todaysForecast);
     document.querySelector('#todaysForecastWrap').innerHTML = '';
     displayForecast(currentforecast);
+    displayForecast(extraInfo);
     // elementGenerator.getTodaysDetails(todaysForecast);
   } catch (err) {
     document.querySelector('#searchBox').value = '';
