@@ -1,23 +1,15 @@
-import {getTodaysForecast} from './weatherData/apiQueries';
 import {initialSetup} from './dom/dom';
 import './style.css';
-import {elementGenerator} from './dom/elementGenerator';
+
+import {setCurrentForecast} from './app/logic';
 
 initialSetup();
 
-async function getCurrentForecast(location) {
-  const todaysForecast = await getTodaysForecast(location);
-  console.log(todaysForecast);
-  elementGenerator.getTodaysForecastElement(todaysForecast);
-}
-
-getCurrentForecast('southport').catch((err) => {
-  console.log(err);
+setCurrentForecast('southport').catch((err) => {
+  if (err.name == 'TypeError') {
+    console.log('type');
+    // handle
+  }
 });
 
-
 // call and setup the element in dom
-
-// icons https://icons8.com/icon/set/weather/small
-
-

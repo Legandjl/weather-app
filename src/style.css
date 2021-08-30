@@ -29,6 +29,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
     line-height: 1;
+    font-family: 'Space Mono', monospace;
 }
 ol, ul {
     list-style: none;
@@ -49,8 +50,8 @@ table {
 #content {
 
 display: grid;
-grid-template-rows: auto 1fr;
-grid-template-columns: auto 1fr;
+grid-template-rows:  1fr ;
+grid-template-columns:  1fr ;
 height: 100vh;
 width:100vw;
 
@@ -59,12 +60,117 @@ width:100vw;
 #todaysForecastWrap {
 
     margin:10px;
-    height:500px;
-    width: 500px;
     border:solid 1px;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: start;
+    align-content: start;
+    justify-content: start;
+    justify-items: start;
 }
 
 #todaysForecast {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr;
+    margin: 20px;  
+}
 
+#forecastImageWrap {
+
+    display: grid;   
+    grid-template-columns: 1fr;
+    justify-items: start;
+    justify-content: start;
+}
+
+#todaysForecast img {
+
+    width:100%;
+    height:80px;
+    max-width: 80px;
+    justify-self: start;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  
+}
+
+#infoWrap {
+
+    margin:10px;
+    border:solid 1px;
+    display: grid;
+}
+
+#detailsWrap {
+
+    border: solid 1px;
+    justify-self: end;
     
+
+}
+
+#description {
+  
+    font-size: 36px;
+    font-weight: 900;
+}
+
+#location {
+
+    font-size: 18px;
+}
+
+#temp {
+
+    font-size: 24px;
+    font-weight: 200;
+    display: grid;
+    grid-template-columns: auto 1fr; 
+}
+
+#searchWrap{
+
+    position: relative;
+}
+
+input[type="text"] {
+    max-width: 120px;
+    border:none;
+    border-bottom:solid 1px;
+    padding:6px;
+    padding-left: 26px;
+}
+
+#searchWrap img {
+    top:-4px;
+    left:0px;
+    width:auto;
+    height:16px;
+    position: absolute;
+}
+
+#searchWrap img:hover {
+
+    cursor: pointer;
+}
+
+input:focus, textarea:focus, select:focus{
+    outline: none;
+}
+
+
+#temp img {
+
+    height:18px;
+    width:18px;
+    justify-self: start;
+    align-self: start;
+}
+
+.weatherInfoWrap {
+
+    display: grid; 
+    align-content: center;
+    padding:2px;
 }

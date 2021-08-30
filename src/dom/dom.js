@@ -1,22 +1,18 @@
-import sun from '../images/sun.svg';
-
-const colors = {
-  sunny: '#FFB448',
-  night: '#3E4772',
-  rain: '#ABABB3',
-  snow: '#FFFFFF',
-};
 
 function initialSetup() {
   const content = document.querySelector('#content');
   const todaysForecastWrap = document.createElement('div');
   todaysForecastWrap.id = 'todaysForecastWrap';
+  const info = document.createElement('div');
+  info.id = 'infoWrap';
   const dailyWrapper = document.createElement('div');
   dailyWrapper.id = 'dailyWrapper';
+  // content.append(info);
   content.append(todaysForecastWrap);
-  const sunIcon = new Image();
-  sunIcon.src = sun;
-  content.append(sunIcon);
 }
 
-export {initialSetup};
+const displayForecast = (forecast) => {
+  document.querySelector('#todaysForecastWrap').append(forecast);
+};
+
+export {initialSetup, displayForecast};

@@ -1,24 +1,32 @@
 const key = 'b4609a0371e5da4b7c9c52d9527e882f';
 
-// create an object holding weather icons
-// name them as named in the data
-// then if thunderstorm use icon thunderstorm etc
+const GetForecastObject = (forecast, location) => {
+  // returns the details for display on the right side
+  /*
+  const getDetails = () => {
+    const mainObject = {};
+    mainObject.feel = forecast.current['feels_like'] + 'c';
+    mainObject.humidity = forecast.current.humidity;
+    mainObject.windSpeed = forecast.hourly[0]['wind_gust'];
+    mainObject.rainChance = forecast.hourly[0].pop;
+    return mainObject;
+  };
+*/
+  // returns the main forecast object for display on the left side of screen
+  const getMain = () => {
+    const mainObject = {};
+    mainObject.description = forecast.current.weather[0].description;
+    mainObject.location = location;
+    mainObject.temp = String(forecast.current.temp);
+    mainObject.iconKey = forecast.current.weather[0].icon;
+    return mainObject;
+  };
 
-const getForecastObject = (forecast, location) => {
-  const todaysForecast = {};
-
-  console.log(forecast);
-
-  todaysForecast.description = forecast.weather[0].description;
-  todaysForecast.cloudCoverage = forecast.clouds + '% cloud coverage';
-  todaysForecast.temp = forecast.temp + 'c current temp';
-  todaysForecast.feel = 'feels like ' + forecast['feels_like'] + 'c';
-  todaysForecast.humidity = forecast.humidity;
-  todaysForecast.iconKey = forecast.weather[0].main;
-  todaysForecast.location = location;
-
-  return todaysForecast;
+  return {getMain};
 };
+
+// returns the coords of a location
+// onecall requires coords instead of location
 
 async function getCoords(location) {
   const locationData = await fetch(
@@ -28,7 +36,7 @@ async function getCoords(location) {
   const locationDataJson = await locationData.json();
   return [locationDataJson.coord.lat, locationDataJson.coord.lon];
 }
-
+// returns all required data in a single call
 async function oneCall(location) {
   const coords = await getCoords(location);
   const data = await fetch(
@@ -41,14 +49,9 @@ async function oneCall(location) {
 async function getTodaysForecast(location) {
   const allForecastData = await oneCall(location);
   const forecastJson = await allForecastData.json();
-  const todaysForecast = getForecastObject(forecastJson.current, location);
-  console.log(forecastJson);
+  // eslint-disable-next-line new-cap
+  const todaysForecast = GetForecastObject(forecastJson, location);
   return todaysForecast;
 }
 
 export {getTodaysForecast};
-
-// eslint-disable-next-line max-len
-// console.log(forecastJson.daily[0].pop + '% chance of rain'); // can get prob of precip from daily
-// eslint-disable-next-line max-len
-// console.log(forecastJson.hourly[2].pop + '% chance of rain in 2 hours'); // and from hourly*/
