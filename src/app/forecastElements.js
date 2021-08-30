@@ -6,10 +6,10 @@ import {setCurrentForecast} from './logic';
 
 const celsius = new Image();
 celsius.src = celsiusIcon;
-const elementGenerator = {};
+const forecastGenerator = {};
 
 // sets up main forecast left side
-elementGenerator.getTodaysForecastElement = (forecastObject) => {
+forecastGenerator.getTodaysForecastElement = (forecastObject) => {
   const currentForecast = forecastObject.getMain();
   const forecastWrap = document.createElement('div');
   forecastWrap.id = 'todaysForecast';
@@ -21,7 +21,12 @@ elementGenerator.getTodaysForecastElement = (forecastObject) => {
       container.id = key;
       const wrapper = document.createElement('div');
       wrapper.classList.add('weatherInfoWrap');
-      wrapper.innerText = capitalize.words(val);
+
+      if (key != 'location') {
+        wrapper.innerText = capitalize.words(val);
+      } else {
+        wrapper.innerText = val;
+      }
       container.append(wrapper);
 
       if (key == 'temp') {
@@ -39,7 +44,6 @@ elementGenerator.getTodaysForecastElement = (forecastObject) => {
       forecastWrap.append(imgWrap);
     }
   }
-
   const searchWrap = getSearchWrap();
   forecastWrap.append(searchWrap);
   return forecastWrap;
@@ -48,24 +52,26 @@ elementGenerator.getTodaysForecastElement = (forecastObject) => {
 const getSearchWrap = () => {
   const searchWrap = document.createElement('div');
   searchWrap.id = 'searchWrap';
+
   const searchBox = document.createElement('input');
+  searchBox.type = 'text';
+  searchBox.placeholder = 'Ex: Liverpool, GB';
+  searchBox.id = 'searchBox';
+
   const searchIcon = new Image();
   searchIcon.src = search;
-  searchBox.type = 'text';
 
   searchWrap.append(searchBox);
   searchWrap.append(searchIcon);
 
   searchIcon.addEventListener('click', () => {
-    const location = searchBox.value;
-    setCurrentForecast(location);
+    setCurrentForecast(searchBox.value);
   });
 
   searchBox.addEventListener('keydown', (e) => {
     if (e.key != 'Enter') {
       return;
     }
-
     setCurrentForecast(searchBox.value);
   });
 
@@ -73,7 +79,7 @@ const getSearchWrap = () => {
 };
 
 // sets up todays details on the right side
-elementGenerator.getTodaysDetails = (forecastObject) => {
+forecastGenerator.getTodaysDetails = (forecastObject) => {
   const forecastInfo = forecastObject.getDetails();
   const detailsWrap = document.createElement('div');
   detailsWrap.id = 'detailsWrap';
@@ -91,16 +97,16 @@ elementGenerator.getTodaysDetails = (forecastObject) => {
 
 //
 
-elementGenerator.getHourlyElements = (elementArr) => {
+forecastGenerator.getHourlyElements = (elementArr) => {
   // loop through elements creating a container for each one
   // append to wrapper
   // return wrapper
 
-  elementGenerator.getDailyElements = (elementArr) => {
+  forecastGenerator.getDailyElements = (elementArr) => {
     // loop through elements creating a container for each one
     // append to wrapper
     // return wrapper
   };
 };
 
-export {elementGenerator};
+export {forecastGenerator};

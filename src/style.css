@@ -59,14 +59,15 @@ width:100vw;
 
 #todaysForecastWrap {
 
-    margin:10px;
-    border:solid 1px;
+
     display: grid;
     grid-template-columns: 1fr;
     align-items: start;
     align-content: start;
     justify-content: start;
     justify-items: start;
+    padding:60px;
+
 }
 
 #todaysForecast {
