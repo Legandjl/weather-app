@@ -9,6 +9,9 @@ function initialSetup() {
   dailyWrapper.id = 'dailyWrapper';
   // content.append(info);
   content.append(todaysForecastWrap);
+  const footer = document.createElement('div');
+  footer.id = 'footer';
+  content.append(footer);
 }
 
 const displayForecast = (forecast) => {

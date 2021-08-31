@@ -4,9 +4,7 @@ import search from '../images/search.png';
 import capitalize from 'capitalize';
 import {setCurrentForecast} from './logic';
 
-
 const forecastGenerator = {};
-
 // sets up main forecast left side
 forecastGenerator.getTodaysForecastElement = (forecastObject) => {
   const currentForecast = forecastObject.getMain();
@@ -49,7 +47,76 @@ forecastGenerator.getTodaysForecastElement = (forecastObject) => {
   forecastWrap.append(searchWrap);
   return forecastWrap;
 };
+// sets up todays details on the right side
+forecastGenerator.getTodaysDetails = (forecastObject) => {
+  const forecastInfo = forecastObject.getDetails();
+  console.log(forecastInfo);
+  const detailsWrap = document.createElement('div');
+  detailsWrap.id = 'detailsWrap';
 
+  for (const [key, val] of Object.entries(forecastInfo)) {
+    const container = document.createElement('div');
+    const containerTitle = document.createElement('div');
+    containerTitle.classList.add('containerTitle');
+    containerTitle.innerText = key;
+    container.classList.add('forecastItem');
+    container.innerText = val;
+    if (key == 'Feels Like') {
+      const image = new Image();
+      image.src = celsiusIcon;
+      container.append(image);
+    }
+    detailsWrap.append(containerTitle);
+    detailsWrap.append(container);
+  }
+
+  return detailsWrap;
+};
+// sets up the footer for displaying daily forecast
+forecastGenerator.getDaily = (forecastArray) => {
+  const footer = document.createElement('div');
+  footer.id = 'footer';
+
+  const arr = forecastArray.getDaily();
+
+  for (let x = 0; x < arr.length; x++) {
+    const currentForecastItem = arr[x];
+    const dailyWrap = document.createElement('div');
+    const dailyItemWrap = document.createElement('div');
+
+    for (const [key, val] of Object.entries(currentForecastItem)) {
+      dailyItemWrap.id = 'dailyItemWrap';
+      if (key != 'icon') {
+        const textWrap = document.createElement('div');
+        textWrap.id = 'dailyText';
+        textWrap.classList.add(key);
+        textWrap.innerText = val;
+        dailyItemWrap.append(textWrap);
+
+        if (key == 'tempLow' || key == 'tempHigh') {
+          const icon = new Image();
+          icon.src = celsiusIcon;
+          icon.id = 'dailyTemp';
+          textWrap.append(icon);
+        }
+      }
+
+      if (key == 'icon') {
+        const imgWrap = document.createElement('div');
+        imgWrap.id = 'dailyImageWrap';
+        const icon = new Image();
+        icon.src = icons[val];
+        imgWrap.append(icon);
+        dailyItemWrap.append(imgWrap);
+      }
+      dailyWrap.append(dailyItemWrap);
+    }
+
+    footer.append(dailyWrap);
+  }
+  return footer;
+};
+// helper - sets up and returns searchbox
 const getSearchWrap = () => {
   const searchWrap = document.createElement('div');
   searchWrap.id = 'searchWrap';
@@ -77,46 +144,6 @@ const getSearchWrap = () => {
   });
 
   return searchWrap;
-};
-
-// sets up todays details on the right side
-forecastGenerator.getTodaysDetails = (forecastObject) => {
-  const forecastInfo = forecastObject.getDetails();
-  console.log(forecastInfo);
-  const detailsWrap = document.createElement('div');
-  detailsWrap.id = 'detailsWrap';
-
-  for (const [key, val] of Object.entries(forecastInfo)) {
-    const container = document.createElement('div');
-    const containerTitle = document.createElement('div');
-    containerTitle.classList.add('containerTitle');
-    containerTitle.innerText = key;
-    container.classList.add('forecastItem');
-    container.innerText = val;
-    if (key == 'Feels Like') {
-      const image = new Image();
-      image.src = celsiusIcon;
-      container.append(image);
-    }
-    detailsWrap.append(containerTitle);
-    detailsWrap.append(container);
-  }
-
-  return detailsWrap;
-};
-
-//
-
-forecastGenerator.getHourlyElements = (elementArr) => {
-  // loop through elements creating a container for each one
-  // append to wrapper
-  // return wrapper
-
-  forecastGenerator.getDailyElements = (elementArr) => {
-    // loop through elements creating a container for each one
-    // append to wrapper
-    // return wrapper
-  };
 };
 
 export {forecastGenerator};

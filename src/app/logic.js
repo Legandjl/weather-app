@@ -8,14 +8,16 @@ async function setCurrentForecast(location) {
     const currentforecast =
       forecastGenerator.getTodaysForecastElement(todaysForecast);
     const extraInfo = forecastGenerator.getTodaysDetails(todaysForecast);
+    const daily = forecastGenerator.getDaily(todaysForecast);
     document.querySelector('#todaysForecastWrap').innerHTML = '';
     displayForecast(currentforecast);
     displayForecast(extraInfo);
-    // elementGenerator.getTodaysDetails(todaysForecast);
+    document.querySelector('#footer').remove();
+    document.querySelector('#content').append(daily);
   } catch (err) {
+    console.log(err);
     document.querySelector('#searchBox').value = '';
-    document.querySelector('#searchBox').placeholder =
-      'Location not found.';
+    document.querySelector('#searchBox').placeholder = 'Location not found.';
     return;
   }
 }
