@@ -139,7 +139,7 @@ table {
 
 #todaysForecastWrap {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   align-content: center;
   justify-content: start;
@@ -148,6 +148,7 @@ table {
   min-width: 40vw;
   justify-self: center;
   align-self: center;
+  grid-gap: 20px;
 }
 
 #todaysForecast {
@@ -295,4 +296,93 @@ select:focus {
   font-weight: 900;
   font-size: 18px;
   text-decoration: underline;
+}
+
+@media only screen and (max-width: 950px) {
+  #detailsWrap {
+    margin-left: 30px;
+  }
+
+  #description {
+    font-size: 30px;
+  }
+
+  #location {
+    font-size: 18px;
+  }
+
+  #temp {
+    font-size: 24px;
+    font-weight: 200;
+    display: grid;
+    grid-template-columns: auto 1fr;
+  }
+
+  #dailyImageWrap img {
+    width: auto;
+    max-height: 40px;
+  }
+
+  #dailyItemWrap {
+    margin: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .forecastItem {
+    font-size: 22px;
+  }
+
+  .weekDay {
+    font-size: 16px;
+  }
+
+  #footer {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  #content {
+    min-width: 550px;
+  }
+
+  #description {
+    font-size: 24px;
+  }
+
+  #location {
+    font-size: 14px;
+  }
+
+  #temp {
+    font-size: 18px;
+  }
+
+  .forecastItem {
+    font-size: 18px;
+  }
+
+  #footer {
+    grid-template-columns: 1fr;
+    border: none;
+    margin-bottom: 40px;
+  }
+
+  #dailyImageWrap img {
+    width: auto;
+    max-height: 40px;
+  }
+
+  #dailyItemWrap {
+    text-align: start;
+    justify-content: start;
+    justify-items: start;
+    align-content: center;
+    align-items: center;
+    margin: 5px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column: 1/-1;
+    width: 400px;
+  }
 }

@@ -15,7 +15,6 @@ async function setCurrentForecast(location) {
     document.querySelector('#footer').remove();
     document.querySelector('#content').append(daily);
   } catch (err) {
-    console.log(err);
     document.querySelector('#searchBox').value = '';
     document.querySelector('#searchBox').placeholder = 'Location not found.';
     return;
