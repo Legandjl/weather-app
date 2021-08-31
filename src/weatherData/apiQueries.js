@@ -7,7 +7,7 @@ const key = '5be21b7f49aed6165407fe53b49eba81';
 
 async function getCoordsAndLocation(location) {
   const locationData = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${key}&units=metric`,
+      `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${key}&units=metric`,
       {mode: 'cors'},
   );
   const locationDataJson = await locationData.json();
@@ -20,7 +20,7 @@ async function getCoordsAndLocation(location) {
 async function oneCall(location) {
   const coords = await getCoordsAndLocation(location);
   const data = await fetch(
-      ` http://api.openweathermap.org/data/2.5/onecall?lat=${coords[0]}&lon=${coords[1]}&appid=${key}&units=metric`,
+      ` https://api.openweathermap.org/data/2.5/onecall?lat=${coords[0]}&lon=${coords[1]}&appid=${key}&units=metric`,
       {mode: 'cors'},
   );
   return [data, coords[2]];
