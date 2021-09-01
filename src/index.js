@@ -3,8 +3,9 @@ import './style.css';
 
 import {setCurrentForecast} from './app/logic';
 
+
 initialSetup();
 
-setCurrentForecast('southport', 'metric');
+setCurrentForecast('southport');
 
 

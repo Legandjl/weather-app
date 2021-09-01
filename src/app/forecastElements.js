@@ -6,7 +6,7 @@ import capitalize from 'capitalize';
 import {setCurrentForecast} from './logic';
 
 const forecastGenerator = {};
-const units = 'metric';
+
 // sets up main forecast left side
 forecastGenerator.getTodaysForecastElement = (forecastObject) => {
   const currentForecast = forecastObject.getMain();
@@ -135,14 +135,14 @@ const getSearchWrap = () => {
   searchWrap.append(searchIcon);
 
   searchIcon.addEventListener('click', () => {
-    setCurrentForecast(searchBox.value, units);
+    setCurrentForecast(searchBox.value);
   });
 
   searchBox.addEventListener('keydown', (e) => {
     if (e.key != 'Enter') {
       return;
     }
-    setCurrentForecast(searchBox.value, units);
+    setCurrentForecast(searchBox.value);
   });
 
   return searchWrap;
