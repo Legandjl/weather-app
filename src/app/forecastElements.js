@@ -1,10 +1,12 @@
 import {icons} from '../images/weatherIcons.js';
 import celsiusIcon from '../images/celsius.png';
+// import farhenheit from '../images/farhenheit.png';
 import search from '../images/search.png';
 import capitalize from 'capitalize';
 import {setCurrentForecast} from './logic';
 
 const forecastGenerator = {};
+const units = 'metric';
 // sets up main forecast left side
 forecastGenerator.getTodaysForecastElement = (forecastObject) => {
   const currentForecast = forecastObject.getMain();
@@ -133,14 +135,14 @@ const getSearchWrap = () => {
   searchWrap.append(searchIcon);
 
   searchIcon.addEventListener('click', () => {
-    setCurrentForecast(searchBox.value);
+    setCurrentForecast(searchBox.value, units);
   });
 
   searchBox.addEventListener('keydown', (e) => {
     if (e.key != 'Enter') {
       return;
     }
-    setCurrentForecast(searchBox.value);
+    setCurrentForecast(searchBox.value, units);
   });
 
   return searchWrap;

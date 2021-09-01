@@ -2,9 +2,9 @@ import {displayForecast} from '../dom/dom';
 import {forecastGenerator} from './forecastElements';
 import {getTodaysForecast} from '../weatherData/apiQueries';
 
-async function setCurrentForecast(location) {
+async function setCurrentForecast(location, units) {
   try {
-    const todaysForecast = await getTodaysForecast(location);
+    const todaysForecast = await getTodaysForecast(location, units);
     const currentforecast =
       forecastGenerator.getTodaysForecastElement(todaysForecast);
     const extraInfo = forecastGenerator.getTodaysDetails(todaysForecast);

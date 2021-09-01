@@ -5,11 +5,6 @@ import {setCurrentForecast} from './app/logic';
 
 initialSetup();
 
-setCurrentForecast('southport').catch((err) => {
-  if (err.name == 'TypeError') {
-    console.log('type');
-    // handle
-  }
-});
+setCurrentForecast('southport', 'metric');
 
-// call and setup the element in dom
+
