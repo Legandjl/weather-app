@@ -284,7 +284,13 @@ select:focus {
   grid-gap: 10px;
   margin: 25px;
   grid-template-columns: 1fr;
+  justify-items: center;
   
+}
+
+#dailyText {
+
+  font-weight: 600;
 }
 
 #dailyTemp {
