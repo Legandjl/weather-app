@@ -342,7 +342,7 @@ select:focus {
 
   #temp {
     font-size: 24px;
-    font-weight: 200;
+  
     display: grid;
     grid-template-columns: auto 1fr;
   }
@@ -393,8 +393,9 @@ select:focus {
 
 
   #temp img {
-    height: 18px;
-    width: 18px;
+    
+    height: 12px;
+    width: 12px;
     justify-self: start;
     align-self: start;
   }
