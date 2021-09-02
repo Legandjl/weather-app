@@ -1,11 +1,17 @@
 import {icons} from '../images/weatherIcons.js';
-import celsiusIcon from '../images/celsius.png';
+import celsiusIcon from '../images/celsius2.png';
+import farhenheitIcon from '../images/farhenheit.png';
 // import farhenheit from '../images/farhenheit.png';
 import search from '../images/search.png';
 import capitalize from 'capitalize';
 import {setCurrentForecast} from './logic';
+import {getUnits, setUnits} from './units.js';
 
 const forecastGenerator = {};
+const unitIcons = {
+  metric: celsiusIcon,
+  imperial: farhenheitIcon,
+};
 
 // sets up main forecast left side
 forecastGenerator.getTodaysForecastElement = (forecastObject) => {
@@ -30,7 +36,7 @@ forecastGenerator.getTodaysForecastElement = (forecastObject) => {
 
       if (key == 'temp') {
         const image = new Image();
-        image.src = celsiusIcon;
+        image.src = unitIcons[getUnits()];
         container.appendChild(image);
       }
       forecastWrap.append(container);
@@ -47,6 +53,9 @@ forecastGenerator.getTodaysForecastElement = (forecastObject) => {
   }
   const searchWrap = getSearchWrap();
   forecastWrap.append(searchWrap);
+  document
+      .querySelector('#content')
+      .append(getUnitToggle(currentForecast.location));
   return forecastWrap;
 };
 // sets up todays details on the right side
@@ -97,7 +106,7 @@ forecastGenerator.getDaily = (forecastArray) => {
 
         if (key == 'tempLow' || key == 'tempHigh') {
           const icon = new Image();
-          icon.src = celsiusIcon;
+          icon.src = unitIcons[getUnits()];
           icon.id = 'dailyTemp';
           textWrap.append(icon);
         }
@@ -117,6 +126,28 @@ forecastGenerator.getDaily = (forecastArray) => {
     footer.append(dailyWrap);
   }
   return footer;
+};
+
+const getUnitToggle = (loc) => {
+  const unitToggle = document.createElement('div');
+  unitToggle.id = 'unitToggle';
+
+  const celsiusToggle = new Image();
+  celsiusToggle.src = unitIcons[getUnits()];
+
+  unitToggle.addEventListener('click', (e) => {
+    unitToggle.innerHTML = '';
+
+    if (getUnits() == 'metric') {
+      setUnits('imperial');
+    } else {
+      setUnits('metric');
+    }
+    setCurrentForecast(loc);
+  });
+
+  unitToggle.append(celsiusToggle);
+  return unitToggle;
 };
 // helper - sets up and returns searchbox
 const getSearchWrap = () => {

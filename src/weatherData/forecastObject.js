@@ -1,4 +1,5 @@
 import {getDay, addWeeks, eachDayOfInterval} from 'date-fns';
+import {getSpeedUnit} from '../app/units';
 
 const GetForecastObject = (forecast, location) => {
   // returns the details for display on the right side
@@ -9,7 +10,7 @@ const GetForecastObject = (forecast, location) => {
     mainObject['Humidity'] = forecast.current.humidity + '%';
     mainObject['Wind Speed'] =
       Number.parseFloat(forecast.current['wind_speed'] * 2.237).toPrecision(2) +
-      ' m/ph';
+      getSpeedUnit();
     mainObject['Chance Of Rain'] = forecast.hourly[0].pop + '%';
     return mainObject;
   };
